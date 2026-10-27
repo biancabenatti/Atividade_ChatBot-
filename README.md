@@ -27,4 +27,22 @@ npm start
 
 Abra <http://localhost:3001> no navegador e teste frases como “Quanto vou pagar por isso?”, “Você pode dar uma força?” e “Gostaria de encerrar a assinatura”. A resposta mostra a intenção identificada. Para adicionar exemplos ou intenções, edite `intents.json`, rode `npm run train` novamente e reinicie o servidor. Execute `npm test` para validar as classificações.
 
+## Evidências dos testes
+
+Saída resumida de `npm test` nos dois projetos:
+
+```text
+RulesBased/chatbot-node
+tests 3
+pass 3
+fail 0
+
+PLNBased/chatbot-pln
+tests 3
+pass 3
+fail 0
+```
+
+Os testes do chatbot por regras cobrem horário/localização/promoções, as respostas já existentes e a mensagem padrão. Os testes de PLN verificam as novas intenções (`preco`, `ajuda` e `cancelamento`), as intenções originais e os exemplos de treinamento.
+
 Os dois servidores podem rodar simultaneamente porque usam portas distintas (`3000` e `3001`); a variável de ambiente `PORT` permite alterá-las.
