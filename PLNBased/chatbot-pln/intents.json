@@ -1,0 +1,66 @@
+{
+  "saudacao": [
+    "oi",
+    "olá",
+    "bom dia",
+    "boa tarde",
+    "boa noite",
+    "e aí, tudo bem?",
+    "quero falar com você"
+  ],
+  "pedido_status": [
+    "quero saber meu pedido",
+    "meu pedido chegou?",
+    "acompanhar pedido",
+    "onde está minha encomenda?",
+    "qual o status da compra?",
+    "rastrear meu pedido",
+    "quando meu pedido será entregue?"
+  ],
+  "agradecimento": [
+    "obrigado",
+    "obrigada",
+    "valeu",
+    "agradeço pela ajuda",
+    "muito obrigado pela informação"
+  ],
+  "preco": [
+    "qual é o preço?",
+    "qual o valor do produto?",
+    "quanto custa?",
+    "quanto fica esse plano?",
+    "quero saber o preço",
+    "tem algum custo?",
+    "qual o preço da compra?",
+    "me informe os valores",
+    "quanto vou pagar por isso?",
+    "quanto devo pagar?",
+    "qual é o valor total?",
+    "quanto preciso pagar?",
+    "qual o preço cobrado?"
+  ],
+  "ajuda": [
+    "preciso de ajuda",
+    "pode me ajudar?",
+    "como isso funciona?",
+    "não consigo usar o serviço",
+    "tenho uma dúvida",
+    "me ajude por favor",
+    "quero suporte",
+    "você pode dar uma força?",
+    "pode me orientar?",
+    "estou precisando de suporte"
+  ],
+  "cancelamento": [
+    "quero cancelar",
+    "como cancelar meu pedido?",
+    "quero cancelar minha assinatura",
+    "desejo cancelar o plano",
+    "quero desistir da compra",
+    "preciso fazer um cancelamento",
+    "não quero mais o pedido",
+    "gostaria de encerrar a assinatura",
+    "quero dar baixa na assinatura",
+    "pretendo parar o plano"
+  ]
+}

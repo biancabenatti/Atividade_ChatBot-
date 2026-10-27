@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chatbot baseado em regras</title>
+  <style>
+    :root { color-scheme: light; font-family: system-ui, sans-serif; color: #172033; background: #f3f6fb; }
+    body { max-width: 720px; margin: 0 auto; padding: 32px 16px; }
+    main { background: white; border: 1px solid #dce3ee; border-radius: 16px; box-shadow: 0 12px 32px #1f355214; padding: 24px; }
+    h1 { margin-top: 0; font-size: 1.5rem; }
+    #chat { min-height: 260px; max-height: 55vh; overflow-y: auto; border: 1px solid #e1e7f0; border-radius: 12px; padding: 12px; }
+    .message { margin: 8px 0; padding: 10px 12px; border-radius: 12px; white-space: pre-wrap; overflow-wrap: anywhere; }
+    .user { margin-left: 12%; background: #e8efff; }
+    .bot { margin-right: 12%; background: #edf7f0; }
+    form { display: flex; gap: 8px; margin-top: 12px; }
+    input { flex: 1; min-width: 0; border: 1px solid #b9c5d6; border-radius: 8px; padding: 12px; font: inherit; }
+    button { border: 0; border-radius: 8px; padding: 0 18px; color: white; background: #2457c5; font: inherit; cursor: pointer; }
+    button:disabled { opacity: .6; cursor: wait; }
+    #status { min-height: 1.5em; color: #9c2f2f; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Chatbot baseado em regras</h1>
+    <p>Pergunte sobre horário de atendimento, localização, promoções, login ou planos.</p>
+    <div id="chat" aria-live="polite" aria-label="Conversa"></div>
+    <form id="chat-form">
+      <input id="message" name="message" autocomplete="off" placeholder="Digite sua mensagem..." aria-label="Mensagem" required>
+      <button id="send" type="submit">Enviar</button>
+    </form>
+    <p id="status" role="status"></p>
+  </main>
+  <script>
+    const form = document.getElementById("chat-form");
+    const input = document.getElementById("message");
+    const chat = document.getElementById("chat");
+    const sendButton = document.getElementById("send");
+    const status = document.getElementById("status");
+
+    function addMessage(sender, text, kind) {
+      const message = document.createElement("div");
+      message.className = `message ${kind}`;
+      message.textContent = `${sender}: ${text}`;
+      chat.append(message);
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const message = input.value.trim();
+      if (!message) return;
+
+      addMessage("Você", message, "user");
+      input.value = "";
+      status.textContent = "";
+      sendButton.disabled = true;
+
+      try {
+        const response = await fetch("/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message })
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || "Não foi possível enviar a mensagem.");
+        addMessage("Bot", data.reply, "bot");
+      } catch (error) {
+        status.textContent = error.message;
+      } finally {
+        sendButton.disabled = false;
+        input.focus();
+      }
+    });
+  </script>
+</body>
+</html>
